@@ -1,0 +1,63 @@
+<article>
+  <h2>{{ data().title }}</h2>
+  <span class="_episode">Episode {{ data().episode_id }}</span>
+
+  <dl>
+    <dt>Director</dt>
+    <dd>{{ data().director }}</dd>
+
+    <dt>Producer</dt>
+    <dd>{{ data().producer }}</dd>
+
+    <dt>Release Date</dt>
+    <dd>{{ data().release_date }}</dd>
+
+    <dt>Characters</dt>
+    <dd>
+      @if (charactersResource.hasValue()) {
+        <ul>
+          @for (character of charactersResource.value(); track character) {
+            <li>
+              <a
+                [routerLink]="['people', character.url | extractId]"
+                [relativeTo]="moduleRoute()"
+                class="app-cmp-link"
+                >{{ character.name }}</a
+              >
+            </li>
+          }
+        </ul>
+      } @else if (charactersResource.error(); as error) {
+        <span class="_status-warning">{{ error.message }}</span>
+      } @else if (charactersResource.isLoading()) {
+        <span class="_status-loading">Loading</span>
+      }
+    </dd>
+
+    <dt>Planets</dt>
+    <dd>
+      @if (planetsResource.hasValue()) {
+        <ul>
+          @for (planet of planetsResource.value(); track planet) {
+            <li>
+              <a
+                [routerLink]="['planets', planet.url | extractId]"
+                [relativeTo]="moduleRoute()"
+                class="app-cmp-link"
+                >{{ planet.name }}</a
+              >
+            </li>
+          }
+        </ul>
+      } @else if (planetsResource.error(); as error) {
+        <span class="_status-warning">{{ error.message }}</span>
+      } @else if (planetsResource.isLoading()) {
+        <span class="_status-loading">Loading</span>
+      }
+    </dd>
+  </dl>
+
+  <div class="_opening-crawl">
+    <p>{{ data().opening_crawl }}</p>
+  </div>
+</article>

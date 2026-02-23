@@ -1,0 +1,94 @@
+/* ===== PeopleList Component ===== */
+:host {
+  display: block;
+}
+
+ul {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: linear-gradient(145deg, rgba(30, 30, 40, 0.8) 0%, rgba(20, 20, 25, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--sw-accent, #ffe81f);
+      transform: scaleY(0);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      background: linear-gradient(145deg, rgba(40, 40, 50, 0.9) 0%, rgba(25, 25, 30, 1) 100%);
+      border-color: rgba(255, 232, 31, 0.3);
+      box-shadow: 0 8px 25px rgba(255, 232, 31, 0.15);
+      transform: translateY(-3px);
+
+      &::before {
+        transform: scaleY(1);
+      }
+
+      a {
+        color: var(--sw-accent, #ffe81f);
+        text-shadow: 0 0 8px rgba(255, 232, 31, 0.4);
+      }
+    }
+
+    a {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      color: var(--sw-text, #e0e0e0);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    ._details {
+      font-size: 0.85rem;
+      color: var(--sw-text-muted, #9ca3af);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    &._empty {
+      justify-content: center;
+      color: var(--sw-text-muted, #9ca3af);
+      font-style: italic;
+      padding: 40px;
+      background: rgba(20, 20, 25, 0.5);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      box-shadow: none;
+
+      &:hover {
+        transform: none;
+        &::before {
+          transform: scaleY(0);
+        }
+      }
+    }
+  }
+}

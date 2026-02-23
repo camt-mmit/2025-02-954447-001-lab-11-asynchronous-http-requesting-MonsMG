@@ -1,0 +1,73 @@
+<article>
+  <h2>{{ data().name }}</h2>
+
+  <dl>
+    <dt>Population</dt>
+    <dd>{{ data().population }}</dd>
+
+    <dt>Climate</dt>
+    <dd>{{ data().climate }}</dd>
+
+    <dt>Terrain</dt>
+    <dd>{{ data().terrain }}</dd>
+
+    <dt>Diameter</dt>
+    <dd>{{ data().diameter }} km</dd>
+
+    <dt>Gravity</dt>
+    <dd>{{ data().gravity }}</dd>
+
+    <dt>Surface Water</dt>
+    <dd>{{ data().surface_water }}%</dd>
+
+    <dt>Rotation Period</dt>
+    <dd>{{ data().rotation_period }} hours</dd>
+
+    <dt>Orbital Period</dt>
+    <dd>{{ data().orbital_period }} days</dd>
+
+    <dt>Residents</dt>
+    <dd>
+      @if (residentsResource.hasValue()) {
+        <ul>
+          @for (resident of residentsResource.value(); track resident) {
+            <li>
+              <a
+                [routerLink]="['people', resident.url | extractId]"
+                [relativeTo]="moduleRoute()"
+                class="app-cmp-link"
+                >{{ resident.name }}</a
+              >
+            </li>
+          }
+        </ul>
+      } @else if (residentsResource.error(); as error) {
+        <span class="_status-warning">{{ error.message }}</span>
+      } @else if (residentsResource.isLoading()) {
+        <span class="_status-loading">Loading</span>
+      }
+    </dd>
+
+    <dt>Films</dt>
+    <dd>
+      @if (filmsResource.hasValue()) {
+        <ul>
+          @for (film of filmsResource.value(); track film) {
+            <li>
+              <a
+                [routerLink]="['films', film.url | extractId]"
+                [relativeTo]="moduleRoute()"
+                class="app-cmp-link"
+                >{{ film.title }}</a
+              >
+            </li>
+          }
+        </ul>
+      } @else if (filmsResource.error(); as error) {
+        <span class="_status-warning">{{ error.message }}</span>
+      } @else if (filmsResource.isLoading()) {
+        <span class="_status-loading">Loading</span>
+      }
+    </dd>
+  </dl>
+</article>

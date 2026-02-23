@@ -1,0 +1,93 @@
+/* ===== Person View Page ===== */
+:host {
+  display: block;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px 24px;
+  background: linear-gradient(145deg, rgba(30, 30, 40, 0.85) 0%, rgba(20, 20, 25, 0.95) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  ._page-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    span {
+      font-size: 0.9rem;
+      color: var(--sw-text-secondary, #d1d5db);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    ._status-warning {
+      color: var(--sw-red, #f87171);
+    }
+
+    ._status-loading {
+      color: var(--sw-blue, #60a5fa);
+      animation: sw-pulse 1.5s ease-in-out infinite;
+    }
+
+    .app-cmp-nav {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+
+      button {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--sw-text-secondary, #d1d5db);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: var(--sw-accent, #ffe81f);
+          border-color: rgba(255, 232, 31, 0.3);
+          background: rgba(255, 232, 31, 0.1);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(255, 232, 31, 0.15);
+        }
+      }
+    }
+  }
+}
+
+._error-message {
+  padding: 24px;
+  text-align: center;
+  color: var(--sw-red, #f87171);
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px dashed rgba(248, 113, 113, 0.3);
+  border-radius: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+@keyframes sw-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+}

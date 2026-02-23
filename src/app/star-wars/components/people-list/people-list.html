@@ -1,0 +1,12 @@
+<ul>
+  @for (person of data(); track person.url) {
+    <li>
+      <a [routerLink]="[person.url.split('/').at(-2)!]">
+        {{ person.name }}
+      </a>
+      <span class="_details"> {{ person.birth_year }} · {{ person.gender }} </span>
+    </li>
+  } @empty {
+    <li class="_empty">No people found.</li>
+  }
+</ul>

@@ -1,0 +1,132 @@
+<article>
+  <h2>{{ data().name }}</h2>
+
+  <dl>
+    <dt>Birth Year</dt>
+    <dd>{{ data().birth_year }}</dd>
+
+    <dt>Gender</dt>
+    <dd>{{ data().gender }}</dd>
+
+    <dt>Height</dt>
+    <dd>{{ data().height }} cm</dd>
+
+    <dt>Mass</dt>
+    <dd>{{ data().mass }} kg</dd>
+
+    <dt>Hair Color</dt>
+    <dd>{{ data().hair_color }}</dd>
+
+    <dt>Skin Color</dt>
+    <dd>{{ data().skin_color }}</dd>
+
+    <dt>Eye Color</dt>
+    <dd>{{ data().eye_color }}</dd>
+
+     <dt>Homeworld (async)</dt>
+  <dd>
+    @if (asyncData().homeworld$ | async; as homeworld) {
+      @if (homeworld) {
+        <a
+          [routerLink]="['planets', homeworld.url | extractId]"
+          [relativeTo]="moduleRoute()"
+          class="app-cmp-link"
+          >{{ homeworld.name }}</a
+        >
+      }
+    } @else {
+      <span class="_status-loading">Loading</span>
+    }
+  </dd>
+
+  <dt>Homeworld (resource)</dt>
+  <dd>
+    @if (homeworldResource.hasValue()) {
+      <a
+        [routerLink]="['planets', homeworldResource.value().url | extractId]"
+        [relativeTo]="moduleRoute()"
+        class="app-cmp-link"
+        >{{ homeworldResource.value().name }}</a
+      >
+    } @else if (homeworldResource.error(); as error) {
+      <span class="_status-warning">{{ error.message }}</span>
+    } @else if (homeworldResource.isLoading()) {
+      <span class="_status-loading">Loading</span>
+    }
+  </dd>
+
+  <dt>Films (async)</dt>
+  <dd>
+    <ul>
+      @for (film$ of asyncData().films; track film$) {
+        @if (film$ | async; as film) {
+          <li>
+            <a
+              [routerLink]="['films', film.url | extractId]"
+              [relativeTo]="moduleRoute()"
+              class="app-cmp-link"
+              >{{ film.title }}</a
+            >
+          </li>
+        } @else {
+          <li>
+            <span class="_status-loading">Loading</span>
+          </li>
+        }
+      }
+    </ul>
+  </dd>
+
+  <dt>Films (resource)</dt>
+  <dd>
+    @if (filmsResource.hasValue()) {
+      <ul>
+        @for (film of filmsResource.value(); track film) {
+          <li>
+            <a
+              [routerLink]="['films', film.url | extractId]"
+              [relativeTo]="moduleRoute()"
+              class="app-cmp-link"
+              >{{ film.title }}</a
+            >
+          </li>
+        }
+      </ul>
+    } @else if (filmsResource.error(); as error) {
+      <span class="_status-warning">{{ error.message }}</span>
+    } @else if (filmsResource.isLoading()) {
+      <span class="_status-loading">Loading</span>
+    }
+  </dd>
+
+  <dt>Films (form)</dt>
+  <dd>
+    <ul>
+      @for (filmFieldTree of filmsForm; track filmFieldTree) {
+        @let filmResource = filmFieldTree().metadata(filmResourceKey)!;
+        <li>
+          @if (filmResource.hasValue()) {
+            <a
+              [routerLink]="['films', filmResource.value().url | extractId]"
+              [relativeTo]="moduleRoute()"
+              class="app-cmp-link"
+              >{{ filmResource.value().title }}</a
+            >
+          } @else if (filmResource.error(); as error) {
+            <span class="_status-warning">{{ error.message }}</span>
+          } @else if (filmResource.isLoading()) {
+            <span class="_status-loading">Loading</span>
+          }
+        </li>
+      }
+    </ul>
+  </dd>
+
+  <dt>Created</dt>
+  <dd>{{ data().created | date }}</dd>
+
+  <dt>Edited</dt>
+  <dd>{{ data().edited | date }}</dd>
+  </dl>
+
+</article>

@@ -1,0 +1,24 @@
+<header>
+  <form (submit)="$event.preventDefault()" (submit)="onSearch()">
+    <fieldset [disabled]="form().disabled()">
+      <input type="text" [formField]="form.search" placeholder="Search" />
+      <button type="button" (click)="clearSearch()">X</button>
+    </fieldset>
+  </form>
+</header>
+@if (resource.hasValue()) {
+  @if (resource.value().results.length > 0) {
+    <ul>
+      @for (item of resource.value().results; track item.url) {
+        <li>{{ item.name }}</li>
+      }
+    </ul>
+  } @else {
+    <p>Not Found</p>
+  }
+} @else if (resource.isLoading()) {
+  <p>Loading</p>
+} @else if (resource.error(); as error) {
+  <p>{{ error.message }}</p>
+}
+

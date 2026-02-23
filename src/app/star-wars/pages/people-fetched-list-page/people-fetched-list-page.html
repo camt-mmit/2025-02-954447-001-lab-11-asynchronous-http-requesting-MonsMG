@@ -1,0 +1,7 @@
+@if (data$ | async; as data) {
+  <ul>
+    @for (item of data.results; track item.url) {
+      <li>{{ item.name }}</li>
+    }
+  </ul>
+}

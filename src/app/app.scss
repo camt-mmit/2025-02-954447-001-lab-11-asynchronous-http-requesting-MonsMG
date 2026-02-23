@@ -1,0 +1,60 @@
+/* ===== App Root Layout ===== */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__logo {
+    height: 26px;
+    width: auto;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  &__nav {
+    ul {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+
+    a {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #666;
+      transition: all 200ms ease;
+
+      &:hover {
+        color: #333;
+        background: #f0f0f0;
+      }
+    }
+
+    .app-st-active a {
+      color: #7c3aed;
+      background: #f3f0ff;
+    }
+  }
+}
+
+.app-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}

@@ -1,0 +1,83 @@
+/* ===== People HTTP Resource List ===== */
+:host {
+  display: block;
+}
+
+header {
+  margin-bottom: 20px;
+
+  form {
+    fieldset {
+      display: flex;
+      gap: 8px;
+      border: none;
+      padding: 0;
+
+      &:disabled { opacity: 0.5; }
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 8px 14px;
+      background: var(--sw-bg-input);
+      border: 1px solid var(--sw-border);
+      border-radius: var(--sw-radius);
+      color: var(--sw-text);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color var(--sw-transition);
+
+      &::placeholder { color: var(--sw-text-muted); }
+
+      &:focus {
+        border-color: var(--sw-accent);
+        box-shadow: 0 0 0 2px var(--sw-accent-glow);
+      }
+    }
+
+    button {
+      padding: 8px 14px;
+      background: rgba(248, 113, 113, 0.15);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      border-radius: var(--sw-radius);
+      color: var(--sw-red);
+      cursor: pointer;
+      font-weight: 600;
+      font-family: inherit;
+      transition: all var(--sw-transition);
+
+      &:hover { background: rgba(248, 113, 113, 0.25); }
+    }
+  }
+}
+
+p {
+  padding: 20px;
+  text-align: center;
+  color: var(--sw-text-secondary);
+  font-style: italic;
+}
+
+ul {
+  display: grid;
+  gap: 8px;
+  list-style: none;
+
+  li {
+    padding: 14px 20px;
+    background: var(--sw-bg-card);
+    border: 1px solid var(--sw-border);
+    border-radius: var(--sw-radius);
+    color: var(--sw-text);
+    font-weight: 500;
+    transition: all var(--sw-transition);
+
+    &:hover {
+      background: var(--sw-bg-card-hover);
+      border-color: var(--sw-border-accent);
+      box-shadow: 0 0 14px rgba(251, 191, 36, 0.08);
+      transform: translateX(4px);
+    }
+  }
+}

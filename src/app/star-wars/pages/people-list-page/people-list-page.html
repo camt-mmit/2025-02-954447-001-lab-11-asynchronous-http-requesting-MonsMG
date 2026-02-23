@@ -1,0 +1,56 @@
+<header>
+  <form (submit)="$event.preventDefault()" (submit)="onSearch()">
+    <fieldset [disabled]="form().disabled()" class="_search-fieldset">
+      <input type="text" [formField]="form.search" placeholder="Search" aria-label="Search" />
+
+      <button type="button" class="app-cmp-button app-cl-warn" (click)="clearSearch()">
+        <i class="material-symbols-outlined">close</i>
+      </button>
+    </fieldset>
+  </form>
+
+  <nav class="_page-navigation">
+    <span>
+      @if (resource.hasValue()) {
+        <b>No. of items: </b
+        ><span class="app-cl-number">{{ resource.value().count | number }}</span>
+      } @else if (resource.error()) {
+        <b class="_status-warning">Error</b>
+      } @else if (resource.isLoading()) {
+        <b class="_status-loading">Loading</b>
+      }
+      <b> | Page: </b><span class="app-cl-number">{{ currentPage() | number }}</span>
+    </span>
+
+    <ul class="app-cmp-nav">
+      <li>
+        <a
+          [routerLink]="previousPage() ? [] : null"
+          [queryParams]="previousPage() === '1' ? { page: null } : { page: previousPage() }"
+          queryParamsHandling="merge"
+          replaceUrl
+          aria-label="Previous Page"
+        >
+          <i class="material-symbols-outlined">chevron_backward</i>
+        </a>
+      </li>
+      <li>
+        <a
+          [routerLink]="nextPage() ? [] : null"
+          [queryParams]="{ page: nextPage() }"
+          queryParamsHandling="merge"
+          replaceUrl
+          aria-label="Next Page"
+        >
+          <i class="material-symbols-outlined">chevron_forward</i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+@if (resource.hasValue()) {
+  <app-people-list [data]="resource.value().results" />
+} @else if (resource.error(); as error) {
+  <p class="_error-message">{{ error.message }}</p>
+}

@@ -1,0 +1,12 @@
+<ul>
+  @for (planet of data(); track planet.url) {
+    <li>
+      <a [routerLink]="[planet.url.split('/').at(-2)!]">
+        {{ planet.name }}
+      </a>
+      <span class="_details"> Climate: {{ planet.climate }} · Terrain: {{ planet.terrain }} </span>
+    </li>
+  } @empty {
+    <li class="_empty">No planets found.</li>
+  }
+</ul>

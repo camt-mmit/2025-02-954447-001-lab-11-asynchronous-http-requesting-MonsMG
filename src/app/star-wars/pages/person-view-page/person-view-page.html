@@ -1,0 +1,26 @@
+<header>
+  <nav class="_page-navigation">
+    <span>
+      @if (resource.error()) {
+        <b class="_status-warning">Error</b>
+      } @else if (resource.isLoading()) {
+        <b class="_status-loading">Loading</b>
+      }
+    </span>
+
+    <ul class="app-cmp-nav">
+      <li>
+        <button type="button" (click)="goBack()">
+          <i class="material-symbols-outlined">chevron_backward</i>
+          Back
+        </button>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+@if (resource.hasValue()) {
+  <app-person-view [data]="resource.value()" [moduleRoute]="moduleRoute" />
+} @else if (resource.error(); as error) {
+  <p class="_error-message">{{ error.message }}</p>
+}

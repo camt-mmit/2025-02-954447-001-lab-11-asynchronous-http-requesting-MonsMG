@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+/* ===== Star Wars Scoped Theme ===== */
+:host {
+  /* Scoped design tokens — brighter warm navy */
+  --sw-bg: #1b2438;
+  --sw-bg-card: #243052;
+  --sw-bg-card-hover: #2c3a62;
+  --sw-bg-input: #1e2a44;
+  --sw-text: #e8ecf4;
+  --sw-text-secondary: #a0b0cc;
+  --sw-text-muted: #6b7fa0;
+  --sw-accent: #fbbf24;
+  --sw-accent-hover: #f59e0b;
+  --sw-accent-glow: rgba(251, 191, 36, 0.12);
+  --sw-blue: #60a5fa;
+  --sw-red: #f87171;
+  --sw-green: #4ade80;
+  --sw-border: rgba(255, 255, 255, 0.08);
+  --sw-border-accent: rgba(251, 191, 36, 0.35);
+  --sw-radius: 10px;
+  --sw-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --sw-transition: 200ms ease;
+
+  display: block;
+  background: var(--sw-bg);
+  color: var(--sw-text);
+  min-height: calc(100vh - 120px);
+  border-radius: 16px;
+  padding: 24px;
+  background-image:
+    radial-gradient(ellipse at 15% 30%, rgba(251, 191, 36, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 70%, rgba(96, 165, 250, 0.04) 0%, transparent 50%);
+}
+
+/* --- Title Bar --- */
+._sw-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--sw-accent);
+  letter-spacing: 1px;
+
+  &::before {
+    content: '⭐';
+    font-size: 1.2rem;
+  }
+}
+
+/* --- Tab Navigation --- */
+nav {
+  margin-bottom: 24px;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+  }
+
+  li a {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: var(--sw-radius);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--sw-text-secondary);
+    background: var(--sw-bg-card);
+    border: 1px solid var(--sw-border);
+    transition: all var(--sw-transition);
+
+    &:hover {
+      color: var(--sw-accent);
+      background: var(--sw-bg-card-hover);
+      border-color: var(--sw-border-accent);
+      box-shadow: 0 0 14px rgba(251, 191, 36, 0.08);
+    }
+  }
+
+  /* Active tab */
+  .app-st-active a {
+    color: var(--sw-accent) !important;
+    background: rgba(251, 191, 36, 0.12) !important;
+    border-color: var(--sw-border-accent) !important;
+  }
+}
