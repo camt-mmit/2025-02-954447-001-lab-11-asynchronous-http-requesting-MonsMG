@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, linkedSignal } from '@angular/core';
-import { FormField, form, submit } from '@angular/forms/signals';
+import { FormField, FormRoot, form, submit } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { EventsList } from '../../components/events-list/events-list';
 import { LoadTrigger } from '../../components/load-trigger/load-trigger';
@@ -22,7 +22,7 @@ const defaultParams: Partial<EventsResourceQueryOptions['params']> = {
 
 @Component({
   selector: 'app-events-list-page',
-  imports: [EventsList, FormField, DatePipe, LoadTrigger, RouterLink],
+  imports: [EventsList, FormField, DatePipe, LoadTrigger, RouterLink, FormRoot],
   templateUrl: './events-list-page.html',
   styleUrl: './events-list-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,29 +58,34 @@ export class EventsListPage {
     },
   });
 
-  /** ฟอร์มค้นหา */
+  /** ฟอร์มค้นหา พร้อม submission action ที่รีเซ็ตผลลัพธ์และอัปเดต Query Parameter */
   protected readonly form = form(
     linkedSignal(() => ({ q: this.params().params?.q ?? '' }) as const),
+    {
+      submission: {
+        action: async (form) => {
+          this.items.set(null);
+
+          void this.router.navigate([], {
+            queryParams: removeEmptyProperties(form().value()),
+            replaceUrl: true,
+          });
+        },
+      },
+    },
   );
 
   private readonly router = inject(Router);
 
-  /** ส่งคำค้นหาไปอัปเดต Query Parameter และรีเซ็ตผลลัพธ์ */
+  /** ส่งคำค้นหา (ใช้ submission action ที่ตั้งค่าไว้ใน form config) */
   protected onSearch(): void {
-    submit(this.form, async (form) => {
-      this.items.set(null);
-
-      void this.router.navigate([], {
-        queryParams: removeEmptyProperties(form().value()),
-        replaceUrl: true,
-      });
-    });
+    submit(this.form);
   }
 
-  /** ล้างคำค้นหาและโหลดใหม่ */
+  /** ล้างคำค้นหาแล้วค้นใหม่ */
   protected clearSearch(): void {
     this.form.q().value.set('');
-    this.onSearch();
+    submit(this.form);
   }
 
   /** โหลดกิจกรรมหน้าถัดไป */
