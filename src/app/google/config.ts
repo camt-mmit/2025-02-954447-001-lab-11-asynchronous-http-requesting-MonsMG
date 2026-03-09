@@ -15,5 +15,5 @@ export const googleOauthConfig: OauthClientConfiguration = {
   /** ทางกลับหลังจากผู้ใช้ล็อกอิน (ปรับตามสภาพแวดล้อมว่ารันบน Dev หรือ Prod) */
   redirectUrl: isDevMode()
     ? 'http://localhost:4200/google/authorization'
-    : 'https://camt-mmit.github.io/2025-02-954447-001-lab-11-asynchronous-http-requesting-mrpachara/google/authorization',
+    : 'https://camt-mmit.github.io/2025-02-954447-001-lab-11-asynchronous-http-requesting-MonsMG/google/authorization',
 };
