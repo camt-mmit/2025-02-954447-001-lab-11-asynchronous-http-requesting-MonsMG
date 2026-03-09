@@ -5,9 +5,9 @@ export const googleOauthConfig: OauthClientConfiguration = {
   /** ชื่ออ้างอิงของ Provider นี้ */
   name: 'google',
   /** Client ID ที่ได้จาก Google Cloud Console */
-  id: '209689905225-dj1bo29m0c7or5926cv4bb1nu5aru0cv.apps.googleusercontent.com',
+  id: '',
   /** Client Secret (ไม่จำเป็นต้องใช้ในแอพหน้าบ้านด้วย PKCE แต่ใส่ไว้ให้ครบ) */
-  secret: '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',
+  secret: '',
   /** URL สำหรับนำ Authorization Code หรือ Refresh Token ไปแลก Access Token */
   tokenUrl: 'https://oauth2.googleapis.com/token',
   /** URL หน้าเว็บที่ผู้ใช้จะต้องล็อกอินเพื่อให้สิทธิ์ */
