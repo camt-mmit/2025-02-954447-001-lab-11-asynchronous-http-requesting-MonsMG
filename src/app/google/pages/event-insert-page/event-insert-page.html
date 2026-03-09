@@ -1,0 +1,23 @@
+<form (submit)="$event.preventDefault()" (submit)="save()">
+  <app-event-field-tree [fieldTree]="fieldTree">
+    <div class="_form-actions-bar">
+      <button type="submit" class="app-cmp-button app-cl-filled">
+        <i class="material-symbols-outlined">save</i>
+        Save
+      </button>
+
+      <button type="button" (click)="cancel()" class="app-cmp-button app-cl-warn">
+        <i class="material-symbols-outlined">cancel</i>
+        Cancel
+      </button>
+    </div>
+
+    @if (fieldTree().errors(); as errors) {
+      <ul role="list" class="_form-errors">
+        @for (error of errors; track error) {
+          <li>{{ error.message ?? error.kind }}</li>
+        }
+      </ul>
+    }
+  </app-event-field-tree>
+</form>

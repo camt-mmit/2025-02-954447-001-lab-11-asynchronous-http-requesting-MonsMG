@@ -1,0 +1,58 @@
+<header>
+  <nav>
+    <ul class="app-cmp-nav app-cl-filled _action-links">
+      <li>
+        <a routerLink="insert">
+          <i class="material-symbols-outlined">add_box</i>
+          Event
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <form (submit)="$event.preventDefault()" (submit)="onSearch()">
+    <fieldset [disabled]="form().disabled()" class="_search-fieldset">
+      <input type="text" [formField]="form.q" placeholder="Search" aria-label="Search" />
+
+      <button type="button" class="app-cmp-button app-cl-warn" (click)="clearSearch()">
+        <i class="material-symbols-outlined">close</i>
+      </button>
+    </fieldset>
+  </form>
+
+  <nav class="_page-navigation">
+    <span>
+      @if (this.params().params.timeMin; as timeMin) {
+        <b>Events after: </b><span>{{ timeMin | date }}</span>
+      }
+    </span>
+  </nav>
+</header>
+
+@if (items(); as items) {
+  <app-events-list [data]="items" />
+}
+@if (resource.hasValue()) {
+  @if (resource.value().nextPageToken; as nextPageToken) {
+    @defer (on viewport) {
+      <app-load-trigger (visible)="getMore(nextPageToken)" />
+    } @placeholder {
+      <p class="_status-container">
+        <b>Load more events</b>
+      </p>
+    }
+  } @else {
+    <hr />
+    <p class="_status-container">
+      <b>No more events</b>
+    </p>
+  }
+} @else if (resource.error(); as error) {
+  <p class="_error-container">
+    <b class="_status-warning">{{ error.message }}</b>
+  </p>
+} @else if (resource.isLoading()) {
+  <p class="_status-container">
+    <b class="_status-loading">Loading</b>
+  </p>
+}

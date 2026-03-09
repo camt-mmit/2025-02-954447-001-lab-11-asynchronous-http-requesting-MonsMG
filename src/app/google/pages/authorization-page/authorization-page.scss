@@ -1,0 +1,23 @@
+/* Authorization Page — หน้ารับ Redirect */
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 24px;
+}
+
+p {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 24px 32px;
+  box-shadow: var(--shadow-md);
+  max-width: 480px;
+  text-align: center;
+}
+
+._status-warning {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}

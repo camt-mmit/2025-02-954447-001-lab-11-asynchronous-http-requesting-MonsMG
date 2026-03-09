@@ -1,0 +1,93 @@
+/* Events List — รายการกิจกรรม */
+._data-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+._details {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: box-shadow var(--transition);
+
+  &:hover {
+    box-shadow: var(--shadow-sm);
+  }
+
+  &[open] {
+    box-shadow: var(--shadow-md);
+  }
+
+  summary {
+    padding: 14px 18px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    position: relative;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    /* ลูกศรบอก expand/collapse */
+    &::after {
+      content: '';
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--color-text-secondary);
+      border-bottom: 1.5px solid var(--color-text-secondary);
+      transform: translateY(-50%) rotate(45deg);
+      transition: transform var(--transition);
+    }
+
+    span {
+      font-weight: 500;
+      font-size: 0.9375rem;
+    }
+
+    small {
+      color: var(--color-text-secondary);
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+  }
+
+  &[open] summary::after {
+    transform: translateY(-30%) rotate(-135deg);
+  }
+
+  dl {
+    padding: 0 18px 16px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 14px;
+  }
+
+  dt {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+  }
+
+  dd {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+}
+
+/* ===== Empty State ===== */
+._empty-message {
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+}
