@@ -2,7 +2,7 @@
   <ul class="_data-list">
     @for (person of data(); track person.resourceName) {
       <li>
-        <details class="_details">
+        <details class="_details" open>
           <summary>
             <div class="_person-summary">
               @if (person.photos?.[0]; as photo) {
