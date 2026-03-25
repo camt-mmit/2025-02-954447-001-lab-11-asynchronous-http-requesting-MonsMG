@@ -1,0 +1,58 @@
+<!-- ฟอร์มกรอกข้อมูล Contact: ชื่อ, อีเมล, เบอร์โทร -->
+<fieldset [disabled]="fieldTree()().disabled()">
+  <ng-content select="legend" />
+
+  <!-- ===== ส่วนชื่อ ===== -->
+  <div class="_data-form">
+    <label>
+      <b>Given Name *</b>
+      <input type="text" [formField]="fieldTree().givenName" placeholder="e.g. John" />
+    </label>
+
+    <label>
+      <b>Family Name</b>
+      <input type="text" [formField]="fieldTree().familyName" placeholder="e.g. Doe" />
+    </label>
+  </div>
+
+  <!-- ===== ส่วนอีเมล ===== -->
+  <fieldset class="_data-form _grouped-fieldset">
+    <legend><b>Email</b></legend>
+
+    <label>
+      <b>Email Address *</b>
+      <input type="email" [formField]="fieldTree().email" placeholder="e.g. john@example.com" />
+    </label>
+
+    <label>
+      <b>Type</b>
+      <select [formField]="fieldTree().emailType">
+        <option value="home">Home</option>
+        <option value="work">Work</option>
+        <option value="other">Other</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <!-- ===== ส่วนเบอร์โทร ===== -->
+  <fieldset class="_data-form _grouped-fieldset">
+    <legend><b>Phone</b></legend>
+
+    <label>
+      <b>Phone Number</b>
+      <input type="tel" [formField]="fieldTree().phoneNumber" placeholder="e.g. 081-234-5678" />
+    </label>
+
+    <label>
+      <b>Type</b>
+      <select [formField]="fieldTree().phoneType">
+        <option value="mobile">Mobile</option>
+        <option value="home">Home</option>
+        <option value="work">Work</option>
+        <option value="other">Other</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <ng-content />
+</fieldset>

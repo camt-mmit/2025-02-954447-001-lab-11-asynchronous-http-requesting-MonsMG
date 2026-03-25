@@ -2,17 +2,19 @@
   <ul class="_data-list">
     @for (item of data(); track item) {
       <li>
-        <details class="_details">
-          <summary>
-            <span>{{ item.summary }}</span
-            ><br />
+        <div class="_details">
+          <div class="_summary" style="padding-bottom: 8px;">
+            <strong>{{ item.summary }}</strong><br />
             <small>{{ item.start | extractNestedDate | date: 'medium' }}</small>
-          </summary>
-          <dl>
-            <dt>Description</dt>
-            <dd [innerHTML]="item.description"></dd>
-          </dl>
-        </details>
+          </div>
+          <!-- ดึงข้อมูล description ของกิจกรรมมาแสดงผลทันทีใน list -->
+          @if (item.description) {
+            <dl style="margin-top: 8px;">
+              <dt>Description (รายละเอียด)</dt>
+              <dd [innerHTML]="item.description"></dd>
+            </dl>
+          }
+        </div>
       </li>
     }
   </ul>

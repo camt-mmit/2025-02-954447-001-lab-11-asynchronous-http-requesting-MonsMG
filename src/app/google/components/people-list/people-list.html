@@ -1,0 +1,89 @@
+@if (data().length > 0) {
+  <ul class="_data-list">
+    @for (person of data(); track person.resourceName) {
+      <li>
+        <details class="_details">
+          <summary>
+            <div class="_person-summary">
+              @if (person.photos?.[0]; as photo) {
+                @if (!photo.default) {
+                  <img
+                    [src]="photo.url"
+                    alt="Profile photo"
+                    class="_photo"
+                    referrerpolicy="no-referrer"
+                  />
+                } @else {
+                  <span class="_photo-placeholder">
+                    <i class="material-symbols-outlined">person</i>
+                  </span>
+                }
+              } @else {
+                <span class="_photo-placeholder">
+                  <i class="material-symbols-outlined">person</i>
+                </span>
+              }
+
+              <div class="_person-info">
+                <span class="_name">{{ person.names?.[0]?.displayName ?? '[No Name]' }}</span>
+
+                @if (person.emailAddresses?.[0]; as firstEmail) {
+                  <span class="_email-primary">{{ firstEmail.value }}</span>
+                }
+
+                @if (person.phoneNumbers?.length) {
+                  <div class="_phone-list">
+                    @for (phone of person.phoneNumbers!; track phone.value) {
+                      <div class="_phone-item">
+                        <i class="material-symbols-outlined">call</i>
+                        <strong>{{ phone.value }}</strong>
+                        <span class="_phone-desc">({{ phone.formattedType || phone.type || 'Other' }})</span>
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          </summary>
+
+          <div class="_detail-content">
+            <dl>
+              @if (person.emailAddresses?.length) {
+                <dt>Email</dt>
+                @for (email of person.emailAddresses!; track email.value) {
+                  <dd>
+                    {{ email.value }} <small class="_desc">({{ email.formattedType || email.type || 'Other' }})</small>
+                  </dd>
+                }
+              }
+
+              @if (person.organizations?.length) {
+                <dt>Organization</dt>
+                @for (org of person.organizations!; track org.name) {
+                  <dd>
+                    {{ org.name }}
+                    @if (org.title) {
+                      <span class="_desc">— {{ org.title }}</span>
+                    }
+                  </dd>
+                }
+              }
+
+              @if (person.birthdays?.[0]; as birthday) {
+                <dt>Birthday</dt>
+                <dd>
+                  {{ birthday.date.day }}/{{ birthday.date.month }}
+                  @if (birthday.date.year) {
+                    /{{ birthday.date.year }}
+                  }
+                </dd>
+              }
+            </dl>
+          </div>
+        </details>
+      </li>
+    }
+  </ul>
+} @else {
+  <p class="_empty-message">No contacts found!</p>
+}

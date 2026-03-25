@@ -24,7 +24,13 @@ export class GoogleRoot {
   /** เปิดหน้า Google OAuth สำหรับล็อกอิน */
   protected async login(): Promise<void> {
     const url = await this.oauthClient.getAuthorizationCodeUrl(
-      ['openid', 'profile', 'email', 'https://www.googleapis.com/auth/calendar.events'],
+      [
+        'openid',
+        'profile',
+        'email',
+        'https://www.googleapis.com/auth/calendar.events',
+        'https://www.googleapis.com/auth/contacts',
+      ],
       {
         prompt: 'consent',
         access_type: 'offline',

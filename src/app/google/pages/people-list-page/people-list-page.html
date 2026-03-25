@@ -1,0 +1,68 @@
+<!-- หน้ารายชื่อ Contacts — Header: ปุ่มเพิ่ม + ช่องค้นหา + รายการ + Infinite Scroll -->
+<header>
+  <nav>
+    <ul class="app-cmp-nav app-cl-filled _action-links">
+      <li>
+        <a routerLink="insert">
+          <i class="material-symbols-outlined">person_add</i>
+          Contact
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ค้นหา Contact — ทำงานแบบ Client-side filter (ไม่ส่งไป API) -->
+  <form (submit)="$event.preventDefault()" (submit)="onSearch()">
+    <fieldset [disabled]="searchForm().disabled()" class="_search-fieldset">
+      <input
+        type="text"
+        [formField]="searchForm.q"
+        placeholder="Search contacts"
+        aria-label="Search"
+      />
+
+      <button type="button" class="app-cmp-button app-cl-warn" (click)="clearSearch()">
+        <i class="material-symbols-outlined">close</i>
+      </button>
+    </fieldset>
+  </form>
+
+  <nav class="_page-navigation">
+    <span>
+      @if (resource.hasValue() && resource.value().totalItems; as totalItems) {
+        <b>Total Contacts: </b><span>{{ totalItems }}</span>
+      }
+    </span>
+  </nav>
+</header>
+
+<!-- แสดงรายชื่อ Contact ที่ผ่านการกรอง -->
+@if (filteredItems(); as items) {
+  <app-people-list [data]="items" />
+}
+
+<!-- Infinite scroll: โหลดหน้าถัดไปเมื่อเลื่อนถึงล่างสุด -->
+@if (resource.hasValue()) {
+  @if (resource.value().nextPageToken; as nextPageToken) {
+    @defer (on viewport) {
+      <app-load-trigger (visible)="getMore(nextPageToken)" />
+    } @placeholder {
+      <p class="_status-container">
+        <b>Load more contacts</b>
+      </p>
+    }
+  } @else {
+    <hr />
+    <p class="_status-container">
+      <b>No more contacts</b>
+    </p>
+  }
+} @else if (resource.error(); as error) {
+  <p class="_error-container">
+    <b class="_status-warning">{{ error.message }}</b>
+  </p>
+} @else if (resource.isLoading()) {
+  <p class="_status-container">
+    <b class="_status-loading">Loading</b>
+  </p>
+}

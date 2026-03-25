@@ -1,0 +1,178 @@
+// Variables
+$card-bg: #ffffff;
+$border-radius: 16px;
+$shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+$primary-text: #333;
+$secondary-text: #666;
+$accent-color: #e3f2fd;
+$border-color: #eaeaea;
+
+._data-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  li {
+    background-color: $card-bg;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    border: 1px solid $border-color;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+  }
+}
+
+// ตกแต่งส่วนที่กดขยายได้ (details / summary)
+._details {
+  summary {
+    padding: 16px;
+    cursor: pointer;
+    list-style: none; // ซ่อนลูกศร default ของ html summary
+    outline: none;
+
+    // ซ่อนลูกศรสำหรับ Safari
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    // เลย์เอาต์ของรูปโปรไฟล์และข้อมูล
+    ._person-summary {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+  }
+
+  // เมื่อเปิดรายละเอียด ให้มีเส้นคั่นด้านบน
+  &[open] summary {
+    border-bottom: 1px solid $border-color;
+    background-color: #fafbfc;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+}
+
+// รูปโปรไฟล์และ Placeholder
+._photo,
+._photo-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+._photo-placeholder {
+  background-color: $accent-color;
+  color: #1976d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    font-size: 28px;
+  }
+}
+
+// ข้อมูลหลักของบุคคล
+._person-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+
+  ._name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: $primary-text;
+  }
+
+  ._email-primary {
+    font-size: 0.9rem;
+    color: $secondary-text;
+  }
+}
+
+// รายการเบอร์โทร
+._phone-list {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  ._phone-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    color: #444;
+
+    i {
+      font-size: 1.1rem;
+      color: #2e7d32; // สีเขียวให้ดูเป็นเบอร์โทร
+    }
+
+    ._phone-desc {
+      font-size: 0.85rem;
+      color: #888;
+      font-style: italic;
+    }
+  }
+}
+
+// เนื้อหารายละเอียดด้านล่างเมื่อกดขยาย
+._detail-content {
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 0 0 $border-radius $border-radius;
+
+  dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(100px, max-content) 1fr;
+    gap: 12px 16px;
+    align-items: baseline;
+
+    @media (max-width: 480px) {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    dt {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #777;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    dd {
+      margin: 0;
+      font-size: 0.95rem;
+      color: $primary-text;
+
+      ._desc {
+        color: $secondary-text;
+        margin-left: 4px;
+      }
+    }
+  }
+}
+
+._empty-message {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+  background: #f9f9f9;
+  border-radius: $border-radius;
+  border: 2px dashed #ddd;
+  font-size: 1.1rem;
+}

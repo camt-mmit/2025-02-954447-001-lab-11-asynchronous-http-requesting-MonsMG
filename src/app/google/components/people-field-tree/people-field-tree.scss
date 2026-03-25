@@ -1,0 +1,72 @@
+/* People Field Tree — ฟอร์มกรอกข้อมูล Contact */
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+._data-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    b {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--color-text-secondary);
+    }
+  }
+}
+
+/* ===== Shared Input Styles ===== */
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+select {
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: 0.875rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+  outline: none;
+
+  &:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* ===== Grouped Fieldset (Email / Phone) ===== */
+._grouped-fieldset {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+
+  legend {
+    padding: 0 4px;
+
+    b {
+      text-transform: none;
+      font-size: 0.875rem;
+      color: var(--color-text);
+    }
+  }
+}

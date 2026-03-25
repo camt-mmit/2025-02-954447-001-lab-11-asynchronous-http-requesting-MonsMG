@@ -229,6 +229,8 @@ export interface Photo {
   readonly metadata: FieldMetadata;
   /** The URL of the photo. */
   readonly url: string;
+  /** True if the photo is a default photo; false if the photo is a user-provided photo. */
+  readonly default?: boolean;
 }
 
 /** A person's biography. */
@@ -463,61 +465,61 @@ export interface Person extends GoogleResource {
   /** Output only. Metadata about the person. */
   readonly metadata: PersonMetadata;
   /** The person's names. This field is a singleton for contact sources. */
-  readonly names: readonly Name[];
+  readonly names?: readonly Name[];
   /** The person's nicknames. */
-  readonly nicknames: readonly Nickname[];
+  readonly nicknames?: readonly Nickname[];
   /** Output only. The person's photos. */
-  readonly photos: readonly Photo[];
+  readonly photos?: readonly Photo[];
   /** Output only. The person's cover photos. */
-  readonly coverPhotos: readonly CoverPhoto[];
+  readonly coverPhotos?: readonly CoverPhoto[];
   /** The person's genders. This field is a singleton for contact sources. */
-  readonly genders: readonly Gender[];
+  readonly genders?: readonly Gender[];
   /** The person's birthdays. This field is a singleton for contact sources. */
-  readonly birthdays: readonly Birthday[];
+  readonly birthdays?: readonly Birthday[];
   /** Output only. The person's age ranges. */
-  readonly ageRanges: readonly AgeRangeType[];
+  readonly ageRanges?: readonly AgeRangeType[];
   /** The person's biographies. This field is a singleton for contact sources. */
-  readonly biographies: readonly Biography[];
+  readonly biographies?: readonly Biography[];
   /** The person's email addresses. Limited to 100 for list operations. */
-  readonly emailAddresses: readonly EmailAddress[];
+  readonly emailAddresses?: readonly EmailAddress[];
   /** The person's phone numbers. Limited to 100 for list operations. */
-  readonly phoneNumbers: readonly PhoneNumber[];
+  readonly phoneNumbers?: readonly PhoneNumber[];
   /** The person's street addresses. */
-  readonly addresses: readonly Address[];
+  readonly addresses?: readonly Address[];
   /** The person's instant messaging clients. */
-  readonly imClients: readonly ImClient[];
+  readonly imClients?: readonly ImClient[];
   /** The person's SIP addresses. */
-  readonly sipAddresses: readonly SipAddress[];
+  readonly sipAddresses?: readonly SipAddress[];
   /** The person's associated URLs. */
-  readonly urls: readonly Url[];
+  readonly urls?: readonly Url[];
   /** The person's past or current organizations. */
-  readonly organizations: readonly Organization[];
+  readonly organizations?: readonly Organization[];
   /** The person's occupations. */
-  readonly occupations: readonly Occupation[];
+  readonly occupations?: readonly Occupation[];
   /** The person's interests. */
-  readonly interests: readonly Interest[];
+  readonly interests?: readonly Interest[];
   /** The person's skills. */
-  readonly skills: readonly Skill[];
+  readonly skills?: readonly Skill[];
   /** The person's locations. */
-  readonly locations: readonly Location[];
+  readonly locations?: readonly Location[];
   /** The person's group memberships. */
-  readonly memberships: readonly Membership[];
+  readonly memberships?: readonly Membership[];
   /** The person's relations. */
-  readonly relations: readonly Relation[];
+  readonly relations?: readonly Relation[];
   /** The person's events. */
-  readonly events: readonly Event[];
+  readonly events?: readonly Event[];
   /** The person's external IDs. */
-  readonly externalIds: readonly ExternalId[];
+  readonly externalIds?: readonly ExternalId[];
   /** The person's file-ases. */
-  readonly fileAses: readonly FileAs[];
+  readonly fileAses?: readonly FileAs[];
   /** The person's locale preferences. */
-  readonly locales: readonly Locale[];
+  readonly locales?: readonly Locale[];
   /** The person's miscellaneous keywords. */
-  readonly miscKeywords: readonly MiscKeyword[];
+  readonly miscKeywords?: readonly MiscKeyword[];
   /** The person's client data. */
-  readonly clientData: readonly ClientData[];
+  readonly clientData?: readonly ClientData[];
   /** The person's user defined data. */
-  readonly userDefined: readonly UserDefined[];
+  readonly userDefined?: readonly UserDefined[];
 }
 
 // ---------- Search Contacts ----------
